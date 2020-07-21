@@ -9,18 +9,16 @@ anime_new =  anime_new[anime_new['Members']>=1000]
 def to_lower(s):
     return s.lower()
 
-def trim(anime_new):
-    #changing the titles to all lower case
-    anime_new['Title'] = anime_new['Title'].apply(to_lower)
-    #re-indexing
-    anime_new = anime_new.drop_duplicates()
-    anime_new= anime_new.reset_index()
-    anime_new = anime_new.drop(columns='index')
+#changing the titles to all lower case
+anime_new['Title'] = anime_new['Title'].apply(to_lower)
+#re-indexing
+anime_new = anime_new.drop_duplicates()
+anime_new= anime_new.reset_index()
+anime_new = anime_new.drop(columns='index')
 
-    #Construct a reverse map of indices and anime titles
-    indices = pd.Series(anime_new.index, index=anime_new['Title']).drop_duplicates()
+#Construct a reverse map of indices and anime titles
+indices = pd.Series(anime_new.index, index=anime_new['Title']).drop_duplicates()
 
-    return indices, anime_new
 
 #Applying vectorization to the plot summary to get other similar animes, using tf-idf vectorizer
 def vectorize_similarity(synopsis):
@@ -41,7 +39,7 @@ def vectorize_similarity(synopsis):
 
 
 # Function that takes in anime title as input and outputs most similar anime
-def get_recommendations(title, cosine_sim, indices):
+def get_recommendations(title, cosine_sim):
     # Get the index of the anime that matches the title
     idx = indices[title]
 
@@ -52,7 +50,7 @@ def get_recommendations(title, cosine_sim, indices):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
     # Get the scores of the 10 most similar anime
-    sim_scores = sim_scores[1:11]
+    sim_scores = sim_scores[1:11] 
 
     # Get the anime indices
     anime_indices = [i[0] for i in sim_scores]
@@ -62,7 +60,7 @@ def get_recommendations(title, cosine_sim, indices):
 
 
 #testing the functions above (comment)
-indices, anime_new = trim(anime_new)
-cos_sim = vectorize_similarity(anime_new['Synopsis'])
-ans = get_recommendations('bleach', cos_sim, indices)
-print(ans)
+# indices, anime_new = trim(anime_new)
+# cos_sim = vectorize_similarity(anime_new['Synopsis'])
+# ans = get_recommendations('bleach', cos_sim, indices)
+# print(ans)
