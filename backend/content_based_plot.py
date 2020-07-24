@@ -3,18 +3,14 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
-anime_new = pd.read_csv('../DATA/Anime_data.csv')
-anime_new =  anime_new[anime_new['Members']>=1000]
+anime_new = pd.read_csv('../DATA/Anime_data_content.csv')
 
 def to_lower(s):
     return s.lower()
 
 #changing the titles to all lower case
 anime_new['Title'] = anime_new['Title'].apply(to_lower)
-#re-indexing
-anime_new = anime_new.drop_duplicates()
-anime_new= anime_new.reset_index()
-anime_new = anime_new.drop(columns='index')
+
 
 #Construct a reverse map of indices and anime titles
 indices = pd.Series(anime_new.index, index=anime_new['Title']).drop_duplicates()
@@ -58,9 +54,10 @@ def get_recommendations(title, cosine_sim):
     # Return the top 10 most similar anime
     return anime_new['Title'].iloc[anime_indices]
 
+#to be exported to the next file
+cos_sim = vectorize_similarity(anime_new['Synopsis'])
 
 #testing the functions above (comment)
-# indices, anime_new = trim(anime_new)
-# cos_sim = vectorize_similarity(anime_new['Synopsis'])
-# ans = get_recommendations('bleach', cos_sim, indices)
-# print(ans)
+cos_sim = vectorize_similarity(anime_new['Synopsis'])
+ans = get_recommendations('bleach', cos_sim)
+print(ans)

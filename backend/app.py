@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, make_response, request, url_for
-from content_based_plot import vectorize_similarity, get_recommendations, anime_new
+from content_based_q import preprocess, vectorize_similarity, vectorize_similarity2, get_recommendations_both, anime_df, anime_new
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -11,8 +11,9 @@ def recommend():
         if request.method == 'POST':
             anime = request.get_json()['anime']
         
-        cos_sim = vectorize_similarity(anime_new['Synopsis'])
-        preds = get_recommendations(anime,cos_sim).tolist()
+        cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
+        cos_sim2 = vectorize_similarity2(anime_df['soup'])
+        preds = get_recommendations_both(anime,cos_sim1,cos_sim2).tolist()
         preds = {i:preds[i] for i in range(len(preds))}
         return jsonify( preds) 
     except KeyError:
