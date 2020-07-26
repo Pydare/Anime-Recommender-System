@@ -3,6 +3,7 @@ import {Button} from 'reactstrap'
 import LoadingIndicator from './LoadingComponent';
 import { trackPromise } from 'react-promise-tracker';
 import Popup from './PopupComponent'
+import Popup2 from './Popup2Component'
 
 
 class Form extends React.Component{
@@ -12,12 +13,26 @@ class Form extends React.Component{
         this.state = { 
             anime_name: '',
             result : {},
-            heading: ''
+            heading: '',
+            showPopup: false,
+            showPopup2:false
         };
     
     this.handleChange = this.handleChange.bind(this);
     };
     
+    togglePopup() {
+        this.setState({
+          showPopup: !this.state.showPopup
+        });
+      }
+
+      togglePopup2() {
+        this.setState({
+          showPopup2: !this.state.showPopup2
+        });
+      }
+
     handleChange(event) {
         this.setState({anime_name: event.target.value});
     };
@@ -82,7 +97,21 @@ class Form extends React.Component{
                                 <h4 >Not sure what to choose?</h4>
                                 <h6>Try this button here</h6>
                             </div>
-                            <Button variant="dark" size="sm" className=" ">Try Me</Button>
+                            <Button onClick={this.togglePopup.bind(this)} variant="dark" size="sm" className=" ">Try Me</Button>
+                            {this.state.showPopup ? 
+                                <Popup
+                                    closePopup={this.togglePopup.bind(this)}
+                                />
+                                : null
+                            }
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button onClick={this.togglePopup2.bind(this)} variant="dark" size="sm" className=" ">Try Me Too</Button>
+                            {this.state.showPopup2 ? 
+                                <Popup2  
+                                    closePopup={this.togglePopup2.bind(this)}
+                                />
+                                : null
+                            }
                         </div>
                     </div>
                 </div>

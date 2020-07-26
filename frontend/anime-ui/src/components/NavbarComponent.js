@@ -20,7 +20,7 @@ class NavbarClass extends React.Component{
     render(){
         return (
             <div>
-            <Navbar className="navBar" dark expand="md">
+            <Navbar fixed="top" className="navBar" dark expand="md">
                     <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
                     <NavbarBrand className="mr-auto" href="/">

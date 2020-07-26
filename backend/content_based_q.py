@@ -132,8 +132,8 @@ def get_recommendations_both(title, cos_sim1, cos_sim2):
 anime_df = preprocess(anime_df)
 
 #testing the functions
-# anime_df = preprocess(anime_df)
-# cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
-# cos_sim2 = vectorize_similarity2(anime_df['soup'])
-# ans = get_recommendations_both('hunter x hunter',cos_sim1,cos_sim2)
-# print((ans))
+anime_df = preprocess(anime_df)
+cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
+cos_sim2 = vectorize_similarity2(anime_df['soup'])
+ans = get_recommendations_both('pokemon',cos_sim1,cos_sim2)
+print((type(ans)))

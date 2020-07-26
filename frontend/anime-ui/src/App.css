@@ -4,6 +4,11 @@ body {
   background-size: cover;
   font-family: 'Lato', sans-serif;
 }
+
+.decades{
+  text-align: center;
+}
+
 .nav{
   display:inline;
   margin-left:66em;
@@ -43,14 +48,33 @@ body {
 }
 .popup_inner {
   position: absolute;
-  left: 25%;
-  right: 25%;
+  left: 15%;
+  right: 20%;
   top: 25%;
   bottom: 25%;
   margin: auto;
-  background: white;
+  background: rgba(0,40,70,1);
 }
 
+.overlay {
+  position: fixed; 
+  overflow: auto; 
+  width: 110%; 
+  height: 70%; 
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0; 
+  z-index: 999; 
+  cursor: pointer;
+}
+
+.content {
+  border-radius: 0.25rem;
+  width: 50vw;
+  padding: 2rem;
+  position: relative;
+}
 .nav-right{
   margin: 20px;
 }
