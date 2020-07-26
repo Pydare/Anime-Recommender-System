@@ -50,8 +50,8 @@ class Form extends React.Component{
         }
 
         return(
-            <div className="col-12">
-                <div className="container starting-txt">
+            <div className="container starting-txt">
+                <div className="col-12">
                     <br/><br/><br/><br/>
                     <div className="row">
                     <h3>Enter An Anime You Love</h3>

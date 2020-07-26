@@ -93,29 +93,39 @@ def vectorize_similarity2(soup):
 
 #writing a function to get recommendations using both storyline and features based on 50% for both
 def get_recommendations_both(title, cos_sim1, cos_sim2):
-  # Get the index of the movie that matches the title
-  idx = indices[title]
+    # Get the index of the movie that matches the title
+    idx = indices[title]
 
-  # Get the pairwsie similarity scores of all anime using similarity1
-  sim_scores1 = list(enumerate(cos_sim1[idx]))
+    # Get the pairwsie similarity scores of all anime using similarity1
+    sim_scores1 = list(enumerate(cos_sim1[idx]))
 
-  # Get the pairwsie similarity scores of all anime using similarity1
-  sim_scores2 = list(enumerate(cos_sim2[idx]))
+    # Get the pairwsie similarity scores of all anime using similarity1
+    sim_scores2 = list(enumerate(cos_sim2[idx]))
 
-  #Getting the average of both similarity scores
-  sim_scores_avg = [(sim_scores1[i][0],(sim_scores1[i][1] + sim_scores2[i][1])/2) for i in range(len(sim_scores1))]
+    #Getting the average of both similarity scores
+    sim_scores_avg = [(sim_scores1[i][0],(sim_scores1[i][1] + sim_scores2[i][1])/2) for i in range(len(sim_scores1))]
 
-  # Sort the movies based on the similarity scores
-  sim_scores_avg = sorted(sim_scores_avg, key=lambda x: x[1], reverse=True)
+    # Sort the movies based on the similarity scores
+    sim_scores_avg = sorted(sim_scores_avg, key=lambda x: x[1], reverse=True)
 
-  #Get the scores of the 10 most similar movies
-  sim_scores_avg = sim_scores_avg[1:11]
+    #Get the scores of the 10 most similar movies
+    sim_scores_avg = sim_scores_avg[1:26]
 
-  #Get the movie indices
-  anime_indices = [i[0] for i in sim_scores_avg]
+    #Get the movie indices
+    anime_indices = [i[0] for i in sim_scores_avg]
 
-  #Return the top 10 most similar movies
-  return anime_new['Title'].iloc[anime_indices]
+    #ensuring recommendations don't have the same name with title input
+    final_indices = []
+    for i in anime_indices:
+        if title not in anime_df['Title'].iloc[i]:
+            final_indices.append(i)
+        else:
+            pass
+    
+    # Return the top 10 most similar anime
+    final_indices = final_indices[0:10]
+    #Return the top 10 most similar movies
+    return anime_new['Title'].iloc[final_indices]
 
 
 #exporting to the next file
@@ -125,5 +135,5 @@ anime_df = preprocess(anime_df)
 # anime_df = preprocess(anime_df)
 # cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
 # cos_sim2 = vectorize_similarity2(anime_df['soup'])
-# ans = get_recommendations_both('cowboy bebop',cos_sim1,cos_sim2)
-# print(ans)
+# ans = get_recommendations_both('hunter x hunter',cos_sim1,cos_sim2)
+# print((ans))
