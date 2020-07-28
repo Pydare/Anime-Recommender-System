@@ -109,7 +109,7 @@ def get_recommendations_both(title, cos_sim1, cos_sim2):
     sim_scores_avg = sorted(sim_scores_avg, key=lambda x: x[1], reverse=True)
 
     #Get the scores of the 10 most similar movies
-    sim_scores_avg = sim_scores_avg[1:26]
+    sim_scores_avg = sim_scores_avg[1:80]
 
     #Get the movie indices
     anime_indices = [i[0] for i in sim_scores_avg]
@@ -132,8 +132,8 @@ def get_recommendations_both(title, cos_sim1, cos_sim2):
 anime_df = preprocess(anime_df)
 
 #testing the functions
-anime_df = preprocess(anime_df)
-cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
-cos_sim2 = vectorize_similarity2(anime_df['soup'])
-ans = get_recommendations_both('pokemon',cos_sim1,cos_sim2)
-print((type(ans)))
+# anime_df = preprocess(anime_df)
+# cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
+# cos_sim2 = vectorize_similarity2(anime_df['soup'])
+# ans = get_recommendations_both('pokemon',cos_sim1,cos_sim2)
+# print((type(ans)))

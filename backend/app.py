@@ -25,7 +25,7 @@ def get_all():
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error':'Anime not found'}), 404)
+    return make_response(jsonify({'error':'Anime not found (Try Entering In Lowercases)'}), 404)
     
 
 
