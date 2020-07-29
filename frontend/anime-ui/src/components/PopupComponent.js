@@ -9,14 +9,14 @@ class Popup extends React.Component {
           <div className='popup_inner'>
           <strong><FontAwesome onClick={this.props.closePopup}>&times;</FontAwesome></strong>
           <div className="decades">
-            <p >Try these according to decades</p>
+            <p >Top Anime of these Decades</p>
           </div>
           <div className="row content overlay">
           
           <div className="col-12 col-sm-4">
             <p>1990-1999</p>
             <ul className="">
-              <li>Cowboy Bebop</li>
+              <li><a href="https://cowboybebop.fandom.com/wiki/Cowboy_Bebop" rel="noopener noreferrer" target="_blank">Cowboy Bebop</a></li>
               <li>Mononoke Hime</li>
               <li>One Piece</li>
               <li>Great Teacher Onizuka</li>

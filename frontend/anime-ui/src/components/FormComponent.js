@@ -57,14 +57,14 @@ class Form extends React.Component{
 
     render(){
         const renderItems = Object.keys(this.state.result).map((key, i) =>{
-            return <div className=""><li className="my-li" key={i}>{this.state.result[key]}</li></div>
+            return <div className=""><li className="my-li" key={i}><h6>{this.state.result[key]}</h6></li></div>
                     
           });
 
         return(
             <div className="container starting-txt">
                 <div className="col-12">
-                    <br/><br/><br/><br/>
+                    <br/><br/><br/><br/><br/><br/><br/>
                     <div className="row">
                     <h3>Enter An Anime You Love</h3>
                     
@@ -83,7 +83,7 @@ class Form extends React.Component{
                             <div>
                             <br/>
                             <h3>{this.state.heading}</h3>
-                            <ul className="my-ul"><h5>{renderItems}</h5></ul>
+                            <ul className="my-ul">{renderItems}</ul>
                             <LoadingIndicator/>
                         </div>
                                 <div className="">
