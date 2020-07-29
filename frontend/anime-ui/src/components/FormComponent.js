@@ -50,7 +50,6 @@ class Form extends React.Component{
         
         const body = await response.json()
         this.setState({result:body, heading:"Results"})
-        console.log(this.state.result)
         
         this.setState({ anime_name: '' })
     };
@@ -82,11 +81,11 @@ class Form extends React.Component{
                             <Button variant="dark" size="sm" className=" ">Search</Button>
                             <div>
                             <br/>
-                            <h3>{this.state.heading}</h3>
+                            <h5>{this.state.heading}</h5>
                             <ul className="my-ul">{renderItems}</ul>
                             <LoadingIndicator/>
                         </div>
-                                <div className="">
+                                <div >
                                         <Button onClick={() => window.location.reload(false)} variant="dark" size="sm">Refresh</Button>
                                 <br/><br/>
                                     <div className="not-sure">

@@ -30,7 +30,6 @@ class Popup2 extends React.Component {
         
         const body = await response.json()
         this.setState({result2:body, genreVisible: !this.state.genreVisible})
-        console.log(this.state.result2)
         
     };
 
@@ -47,32 +46,63 @@ class Popup2 extends React.Component {
         <div className="decades">
           <p >Select a Genre to see it's Top Anime (click on button twice)</p>
         </div>
-        <div className="row">
-          <div className="col-6 col-sm-3">
-            <Button onClick={this.onClick} as="input" type="submit" value="Action">Action</Button>
-            {this.state.genreVisible && this.state.button_val === 'Action'?
-            <ul className="my-ul">{renderGenres}</ul>
-            : null}
+        <br/>
+        <div className="row ">
+          <div className="col-4 offset-1 col-sm-3 offset-md-1">
+                <div className="row">
+                <Button onClick={this.onClick} as="input" type="submit" value="Action">Action</Button>
+                </div>
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Comedy">Comedy</Button>
+                </div>
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Drama">Drama</Button>
+                </div>
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Fantasy">Fantasy</Button>
+                </div> 
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Horror">Horror</Button>
+                </div> 
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Shounen">Shounen</Button>
+                </div>  
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Romance">Romance</Button>
+                </div> 
+                <div className="row ">
+                <Button onClick={this.onClick} as="input" type="submit" value="Demon">Demon</Button>
+                </div>         
+          </div>    
+          <div className="col-7 col-sm-8">
+            <div className="row">
+              {this.state.genreVisible && this.state.button_val === 'Action'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Comedy'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Drama'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Fantasy'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Horror'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Shounen'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Romance'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              {this.state.genreVisible && this.state.button_val === 'Demon'?
+              <ul className="my-ul">{renderGenres}</ul>
+              : null}
+              </div>
           </div>
-          <div className="col-6 col-sm-3">
-            <Button onClick={this.onClick} as="input" type="submit" value="Comedy">Comedy</Button>
-            {this.state.genreVisible && this.state.button_val === 'Comedy'?
-            <ul className="my-ul">{renderGenres}</ul>
-            : null}
-          </div>
-          <div className="col-6 col-sm-3">
-            <Button onClick={this.onClick} as="input" type="submit" value="Drama">Drama</Button>
-            {this.state.genreVisible && this.state.button_val === 'Drama'?
-            <ul className="my-ul">{renderGenres}</ul>
-            : null}
-          </div>
-          <div className="col-6 col-sm-3">
-            <Button onClick={this.onClick} as="input" type="submit" value="Fantasy">Fantasy</Button>
-            {this.state.genreVisible && this.state.button_val === 'Fantasy'?
-            <ul className="my-ul">{renderGenres}</ul>
-            : null}
-          </div>
-        </div>    
+        </div>
       </div>
       </div>
     );

@@ -47,6 +47,7 @@ body {
 }
 .popup_inner {
   position: absolute;
+  height: 500px;
   left: 15%;
   right: 20%;
   top: 25%;

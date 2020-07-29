@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.metrics.pairwise import linear_kernel,cosine_similarity
 
-anime_new = pd.read_csv('../DATA/Anime_data_content.csv')
+anime_new = pd.read_csv('../DATA/Anime_data_content2.csv')
 anime_df = anime_new.copy()
 
 def to_lower(s):
@@ -109,23 +109,13 @@ def get_recommendations_both(title, cos_sim1, cos_sim2):
     sim_scores_avg = sorted(sim_scores_avg, key=lambda x: x[1], reverse=True)
 
     #Get the scores of the 10 most similar movies
-    sim_scores_avg = sim_scores_avg[1:80]
+    sim_scores_avg = sim_scores_avg[1:11]
 
     #Get the movie indices
     anime_indices = [i[0] for i in sim_scores_avg]
 
-    #ensuring recommendations don't have the same name with title input
-    final_indices = []
-    for i in anime_indices:
-        if title not in anime_df['Title'].iloc[i]:
-            final_indices.append(i)
-        else:
-            pass
-    
-    # Return the top 10 most similar anime
-    final_indices = final_indices[0:10]
     #Return the top 10 most similar movies
-    return anime_new['Title'].iloc[final_indices]
+    return anime_new['Title'].iloc[anime_indices]
 
 
 #exporting to the next file

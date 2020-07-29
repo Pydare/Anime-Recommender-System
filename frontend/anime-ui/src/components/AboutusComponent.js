@@ -12,7 +12,7 @@ class About extends React.Component{
                 <p>AnimeHouse is a recommender-system responsive web application, based on the use of content-based 
                     <br/> machine-learning algorithms, natural language processing and several other data-preprocessing
                     tools. The<br/> web interface is built with ReactJS, which enables the client side communicate with the
-                    server side, running<br/> with flask.
+                    server, which runs on <br/>flask.
                 
                 <p>Simply enter an anime you've seen and loved, to get recommendations, based on calculated similarities.<br/>
                 If you're not sure of what to enter, you can simply try out the buttons at the bottom of the page to get ideas <br/>

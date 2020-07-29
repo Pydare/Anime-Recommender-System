@@ -18,7 +18,7 @@ def get_genre_recommendations(genre):
             index.append(i)
         
     # Scores of the 10 most similar movies
-    anime_index = index[0:5]
+    anime_index = index[0:10]
 
     # Movie indices
    # movie_indices = [i[0] for i in sig_scores]
