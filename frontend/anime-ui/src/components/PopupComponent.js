@@ -9,13 +9,14 @@ class Popup extends React.Component {
           <div className='popup_inner'>
           <strong><FontAwesome onClick={this.props.closePopup}>&times;</FontAwesome></strong>
           <div className="decades">
-            <p >Top Anime of these Decades</p>
+            <p><strong>Top Anime of these Decades</strong></p>
           </div>
           <div className="row content overlay">
           
           <div className="col-12 col-sm-4">
-            <p>1990-1999</p>
-            <ul className="">
+            <br/>
+            <p><strong>1990-1999</strong></p>
+            <ul className="my-ul-popup">
               <li><a href="https://cowboybebop.fandom.com/wiki/Cowboy_Bebop" rel="noopener noreferrer" target="_blank">Cowboy Bebop</a></li>
               <li>Mononoke Hime</li>
               <li>One Piece</li>
@@ -24,8 +25,9 @@ class Popup extends React.Component {
             </ul>
           </div>
           <div className="col-12 col-sm-4">
-            <p>1990-1999</p>
-            <ul className="">
+            <br/>
+            <p><strong>2000-2009</strong></p>
+            <ul className="my-ul-popup">
               <li>Fullmetal Alchemist Brotherhood</li>
               <li>Death Note</li>
               <li>Code Geass Hangyaku no Lelouch</li>
@@ -34,8 +36,9 @@ class Popup extends React.Component {
             </ul>
           </div>
           <div className="col-12 col-sm-4">
-            <p>2010-2019</p>
-            <ul className="">
+            <br/>
+            <p><strong>2010-2019</strong></p>
+            <ul className="my-ul-popup">
               <li>Steins;Gate</li>
               <li>Kimi no Na wa</li>
               <li>Hunter x Hunter</li>

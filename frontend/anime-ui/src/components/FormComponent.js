@@ -50,13 +50,13 @@ class Form extends React.Component{
         
         const body = await response.json()
         this.setState({result:body, heading:"Results"})
-        
+        console.log(Object.keys(this.state.result)[0])
         this.setState({ anime_name: '' })
     };
 
     render(){
         const renderItems = Object.keys(this.state.result).map((key, i) =>{
-            return <div className=""><li className="my-li" key={i}><h6>{this.state.result[key]}</h6></li></div>
+            return <div className=""><li className="my-li" key={i}><h6><strong>{this.state.result[key]}</strong></h6></li></div>
                     
           });
 
@@ -81,11 +81,27 @@ class Form extends React.Component{
                             <Button variant="dark" size="sm" className=" ">Search</Button>
                             <div>
                             <br/>
-                            <h5>{this.state.heading}</h5>
-                            <ul className="my-ul">{renderItems}</ul>
+                            {this.state.heading === "Results" ?
+                            <div className="card">
+                                <div className="card-header bg-danger text-white"><h5><strong>{this.state.heading}</strong></h5></div>
+                                <div className="card-body">
+                                    {Object.keys(this.state.result)[0]=== "error" ? 
+                                    <img alt="" className="card-pic" 
+                                    src="https://upload.wikimedia.org/wikipedia/commons/8/89/160111_libra_twins.png"/>
+                                    :<img alt="" className="card-pic" 
+                                    src="https://cdn.pixabay.com/photo/2015/01/11/07/07/moe-595960_960_720.png"/>
+                                    }
+                                
+                                    <br/>
+                                    <div className="card-text">
+                                        <ul className="my-ul">{renderItems}</ul>
+                                    </div>
+                                </div>
+                            </div>
+                            : null}
                             <LoadingIndicator/>
                         </div>
-                                <div >
+                                <div ><br/>
                                         <Button onClick={() => window.location.reload(false)} variant="dark" size="sm">Refresh</Button>
                                 <br/><br/>
                                     <div className="not-sure">
