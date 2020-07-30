@@ -48,17 +48,3 @@ class NavbarClass extends React.Component{
 }
 
 export default NavbarClass
-{/* <Navbar bg="light" expand="lg">
-                
-                <NavbarBrand className="">
-                    <Link to="/">AnimeHouse</Link>
-                </NavbarBrand>
-                <NavbarToggler />
-                
-                
-                <Nav className="nav-right">
-                    <NavLink to="/" >Home </NavLink>
-                    <NavLink to="/aboutus">About Us</NavLink>
-                </Nav>
-
-            </Navbar> */}

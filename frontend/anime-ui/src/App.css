@@ -23,10 +23,9 @@ body {
 }
 .starting-txt{
   margin: 0 auto;
-  width:500px;
+  width:100%;
   height:1000px;
   color:white;
-
 }
 
 .container-one{
@@ -48,6 +47,7 @@ body {
 }
 .popup_inner {
   position: absolute;
+  height: 500px;
   left: 15%;
   right: 20%;
   top: 25%;

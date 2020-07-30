@@ -1,10 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Home from './components/HomeComponent';
 import About from './components/AboutusComponent';
 import NavbarClass from './components/NavbarComponent';
-//import logo from './logo.svg';
 import './App.css';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 
 
@@ -18,7 +17,7 @@ class App extends React.Component{
         <NavbarClass/>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/about" component={About}/>
+          <Route exact path="/aboutus" component={About}/>
         </Switch>
       </div>
       </>
