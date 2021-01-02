@@ -4,7 +4,7 @@ import LoadingIndicator from './LoadingComponent';
 import { trackPromise } from 'react-promise-tracker';
 import Popup from './PopupComponent'
 import Popup2 from './Popup2Component'
-
+import BasicAutoSuggest from './AutosuggestComponent'
 
 class Form extends React.Component{
 
@@ -15,7 +15,8 @@ class Form extends React.Component{
             result : {},
             heading: '',
             showPopup: false,
-            showPopup2:false
+            showPopup2:false,
+            suggestions: []
         };
     
     this.handleChange = this.handleChange.bind(this);
@@ -33,12 +34,12 @@ class Form extends React.Component{
         });
       }
 
-    handleChange(event) {
-        this.setState({anime_name: event.target.value});
+    handleChange(data) {
+        this.setState({anime_name: data});
     };
 
     handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         const requestOptions = {
             method: 'POST',
@@ -46,42 +47,55 @@ class Form extends React.Component{
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json'},
             body: JSON.stringify({anime: this.state.anime_name})
         }
-        const response = await trackPromise(fetch('http://127.0.0.1:5000/recommender',requestOptions))
+        console.log(this.state.anime_name)
+        const response = await trackPromise(fetch('https://anime-house.herokuapp.com/recommender',requestOptions))
         
         const body = await response.json()
-        this.setState({result:body, heading:"Results"})
-        console.log(Object.keys(this.state.result)[0])
+        console.log(body)
+        this.setState({result:body, heading:"Recommended for you (Use the links for details)"})
         this.setState({ anime_name: '' })
     };
 
     render(){
-        const renderItems = Object.keys(this.state.result).map((key, i) =>{
-            return <div className=""><li className="my-li" key={i}><h6><strong>{this.state.result[key]}</strong></h6></li></div>
+        // const renderItems = Object.keys(this.state.result).map((key, i) =>{
+        //     return <div key={i} className=""><li key={i} className="my-li"><h6><strong>{this.state.result[key][0]}</strong> <a href={this.state.result[key][1]} className="homepage_link" rel="noopener noreferrer" target="_blank" ><i className="fa fa-external-link"></i></a></h6></li></div>
                     
-          });
+        // });
+
+        const renderBody = Object.keys(this.state.result).map((key,i) => {
+            return <tr key={i} className="" >
+                <td><h6>{this.state.result[key][0]}</h6></td>
+                <td><h6>{this.state.result[key][2]}</h6></td>
+                <td><h6><a href={this.state.result[key][1]} className="homepage_link" rel="noopener noreferrer" target="_blank" ><i className="fa fa-external-link"></i></a></h6></td>
+                </tr>
+        })
 
         return(
-            <div className="container starting-txt">
+            <div className="container ">
                 <div className="col-12">
                     <br/><br/><br/><br/><br/><br/><br/>
+                    
                     <div className="row">
+                    
                     <h3>Enter An Anime You Love</h3>
                     
-                    <h6>&#123; AnimeHouse uses a special Machine Learning Algorithm to make recommendations for you, based on your Anime Input &#125;</h6>
+                    <h6><br/> AnimeHouse uses a special Machine Learning Algorithm to make recommendations for you, based on your Anime Input </h6>
                     {/* <h6>&#123; We use AI to make recommendations for you &#125; </h6> */}
-                    <br/>
+                    <br/><br/>
                     <br/><br/>
                     <br></br>
                         <div className="">
                             <form onSubmit={this.handleSubmit}  method="POST">
-                                <input type="text" placeholder="Anime Title (Lower Cases)"
+                                {/* <input name="anime" type="text" placeholder="Anime Title"
                                 onChange={this.handleChange}
                                 value={this.state.anime_name}
-                                required />
+                                required /> */}
+                            <BasicAutoSuggest onChange={this.handleChange}/>
+                             
                             <Button variant="dark" size="sm" className=" ">Search</Button>
                             <div>
                             <br/>
-                            {this.state.heading === "Results" ?
+                            {this.state.heading === "Recommended for you (Use the links for details)" ?
                             <div className="card">
                                 <div className="card-header bg-danger text-white"><h5><strong>{this.state.heading}</strong></h5></div>
                                 <div className="card-body">
@@ -94,7 +108,15 @@ class Form extends React.Component{
                                 
                                     <br/>
                                     <div className="card-text">
-                                        <ul className="my-ul">{renderItems}</ul>
+                                        {/* <ul className="my-ul">{renderItems}</ul> */}
+                                        <table id="result-table">
+                                            <thead>
+                                            <td><h6><strong>Title</strong></h6></td>
+                                            <td><h6><strong>Similarity%</strong></h6></td>
+                                            <td><h6><strong>Links </strong></h6></td>
+                                            </thead>
+                                            <tbody>{renderBody}</tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +128,7 @@ class Form extends React.Component{
                                 <br/><br/>
                                     <div className="not-sure">
                                         <h4 >Not sure what to choose?</h4>
-                                        <h6>Try these buttons below</h6>
+                                        <h6>Try these options below</h6>
                                     </div>
                                     <Button onClick={this.togglePopup.bind(this)} variant="dark" size="sm" className=" ">Best of Decades</Button>
                                     {this.state.showPopup ? 
@@ -123,7 +145,8 @@ class Form extends React.Component{
                                         />
                                         : null
                                     }
-                                </div>
+                                </div><br/><br/><br/><br/><br/>
+                                <div>AnimeHouse &copy; 2020</div><br/><br/>
                             </form>
                         </div>
                         

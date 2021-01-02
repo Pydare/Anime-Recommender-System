@@ -13,7 +13,7 @@ class Popup2 extends React.Component {
         genreVisible: false
     };
 
-  };
+  }
 
   onClick = async (event) => {
         event.preventDefault();
@@ -26,7 +26,7 @@ class Popup2 extends React.Component {
             body: JSON.stringify({genre: this.state.button_val})
         }
 
-        const response = await trackPromise(fetch('http://127.0.0.1:5000/recommender/genre',requestOptions))
+        const response = await trackPromise(fetch('https://anime-house.herokuapp.com/recommender/genre',requestOptions))
         
         const body = await response.json()
         this.setState({result2:body, genreVisible: !this.state.genreVisible})
@@ -35,42 +35,42 @@ class Popup2 extends React.Component {
 
   render() {
     const renderGenres = Object.keys(this.state.result2).map((key, i) =>{
-        return <div className=""><li className="" key={i}><h6>{this.state.result2[key]}</h6></li></div>
+        return <div key={i} className=""><li key={i} className=""><h6>{this.state.result2[key]}</h6></li></div>
                 
       });
 
     return (
       <div className='popup'>
         <div className='popup_inner'>
-        <strong><FontAwesome onClick={this.props.closePopup}>&times;</FontAwesome></strong>
+        <strong><FontAwesome name="" onClick={this.props.closePopup}>&times;</FontAwesome></strong>
         <div className="decades">
-          <p><strong>Select a Genre to see it's Top Anime (click on button twice)</strong></p>
+          <p><strong>Select a Genre to see it's Top Anime (click to display &#38; clear)</strong></p>
         </div>
         <br/>
         <div className="row ">
           <div className="col-4 offset-1 col-sm-3 offset-md-1">
-                <div className="row">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Action">Action</Button>
                 </div>
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Comedy">Comedy</Button>
                 </div>
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input"size="sm"  type="submit" value="Drama">Drama</Button>
                 </div>
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Fantasy">Fantasy</Button>
                 </div> 
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Horror">Horror</Button>
                 </div> 
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Shounen">Shounen</Button>
                 </div>  
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Romance">Romance</Button>
                 </div> 
-                <div className="row ">
+                <div className="row button-space">
                 <Button onClick={this.onClick} as="input" size="sm" type="submit" value="Demon">Demon</Button>
                 </div>         
           </div>    
