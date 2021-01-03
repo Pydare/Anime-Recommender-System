@@ -12,12 +12,11 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/recommender', methods=['GET','POST'])
+@app.route('/recommender', methods=['GET', 'POST'])
 def recommend():
     try:
         if request.method == 'POST':
-            anime = request.get_json()['anime'].lower().rstrip()
-        print(anime)
+            anime = request.get_json()['anime'].lower().strip()
         cos_sim1 = vectorize_similarity(anime_df['Synopsis'])
         cos_sim2 = vectorize_similarity2(anime_df['soup'])
         preds = get_recommendations_both(anime,cos_sim1,cos_sim2).values.tolist()
@@ -26,11 +25,11 @@ def recommend():
     except KeyError:
         abort(404)
 
-@app.route('/recommender/genre', methods=['GET','POST'])
+@app.route('/recommender/genre', methods=['GET', 'POST'])
 def recommend_genre():
     if request.method == 'POST':
         anime_genre = request.get_json()['genre']
-        print("worked")
+        print("worked") # for debugging
     
     preds = get_genre_recommendations(anime_genre).tolist()
     preds = {i:preds[i] for i in range(len(preds))}
@@ -44,5 +43,5 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    #app.run(debug=True)
-    app.run(host='0.0.0.0', debug=False, port=80) 
+    # app.run(debug=True) # development mode
+    app.run(host='0.0.0.0', debug=False, port=80) # production mode
